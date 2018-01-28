@@ -22,7 +22,9 @@ public class GridController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        getNearestHexCoord(getMouseHexWorldCoord().getPosition());
+        Vector3 test = getMouseHexWorldCoord().getPosition();
+        Vector3 test2 = getWorldCoordsFromHex(getNearestHexCoord(test));
+        print(test.x + ", " + test.z + ") -- (" + test2.x + ", " + test2.z + ")");
     }
 
     private HexPosition getMouseHexWorldCoord()
@@ -50,6 +52,18 @@ public class GridController : MonoBehaviour
         }
     }
 
+    public Vector3 getWorldCoordsFromHex( Vector2 coord )
+    {
+        float x = 0;
+        float y = 0;
+
+        x = (1.5f * SIZE) * coord.x;
+        y = ((SQRT32 * coord.y * SIZE) + ((coord.y % 2) * SQRT32 * SIZE));
+
+        return new Vector3(x, 0, y);
+    }
+
+
 
     private Vector2Int getNearestHexCoord(Vector3 coord)
     {
@@ -58,7 +72,7 @@ public class GridController : MonoBehaviour
         int u = Mathf.FloorToInt((Mathf.Floor(xx) + Mathf.Floor(yy)) / 3);
         int v = Mathf.FloorToInt((xx - yy + u + 1) / 2);
 
-        print("(" + u + "," + v + ")");
-        return (new Vector2Int(u, v));
+        print(v + " " + u);
+        return (new Vector2Int(v,u));
     }
 }
