@@ -5,20 +5,24 @@ using UnityEngine;
 public class GridController : MonoBehaviour
 {
 
-    public int gridWidth;
-    public int gridHeight;
+    public static int gridMinX = -29;
+    public static int gridMaxX = 29;
+    public static int gridMinY = -27;
+    public static int gridMaxY = 29;
+    public static int gridMinYLeft= -42;
+    public static int gridMaxYLeft = 13;
+    public static int gridMaxYRight = 42;
+    public static int gridMinYRight= -13;
+
     public static Vector3 highlightHex;
 
     private const float SQRT32 = 0.86602540378443864676372317075294f;
     private const int SIZE = 20;
 
-    private const float HEXWIDTH = 2*SIZE ;
-    private const float HEXHEIGHT = SIZE*0.8660254037844387f;
-
     // Use this for initialization
     void Start()
     {
-
+        
     }
 
     // Update is called once per frame
@@ -26,7 +30,7 @@ public class GridController : MonoBehaviour
     {
         //Selected Hex Coordinates
         highlightHex = getWorldCoordsFromHex(getNearestHexCoord(getMouseHexWorldCoord().getPosition()));
-        Debug.Log("HexC: X = " + highlightHex.x + ", Z = " + highlightHex.z);
+        //Debug.Log("HexC: X = " + highlightHex.x + ", Z = " + highlightHex.z);
     }
 
     public HexPosition getMouseHexWorldCoord()

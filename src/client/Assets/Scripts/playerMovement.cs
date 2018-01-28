@@ -38,6 +38,6 @@ public class PlayerMovement : MonoBehaviour {
             transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
         }
         //Player Position
-        Debug.Log("PX:" + transform.position.x + " PZ:" + transform.position.z);
+        //Debug.Log("PX:" + transform.position.x + " PZ:" + transform.position.z);
     }
 }
