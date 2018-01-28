@@ -9,9 +9,9 @@ public class GridController : MonoBehaviour
     public static int gridMaxX = 29;
     public static int gridMinY = -27;
     public static int gridMaxY = 29;
-    public static int gridMinYLeft= -42;
+    public static int gridMinYLeft= -43;
     public static int gridMaxYLeft = 13;
-    public static int gridMaxYRight = 42;
+    public static int gridMaxYRight = 43;
     public static int gridMinYRight= -13;
 
     public static Vector3 highlightHex;
