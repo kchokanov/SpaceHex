@@ -15,7 +15,7 @@ public class PlayerMovement : MonoBehaviour {
     private void Update()
     {
         //Cursor Position relative to player
-        Debug.Log(Camera.main.ViewportToWorldPoint(Input.mousePosition));
+        //Debug.Log(Camera.main.ViewportToWorldPoint(Input.mousePosition));
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -37,5 +37,7 @@ public class PlayerMovement : MonoBehaviour {
         {
             transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
         }
+        //Player Position
+        //Debug.Log("PX:" + transform.position.x + " PZ:" + transform.position.z);
     }
 }

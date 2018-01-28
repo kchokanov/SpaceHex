@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
+
 public class GridController : MonoBehaviour
 {
 
@@ -22,12 +23,12 @@ public class GridController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 test = getMouseHexWorldCoord().getPosition();
-        Vector3 test2 = getWorldCoordsFromHex(getNearestHexCoord(test));
-        print(test.x + ", " + test.z + ") -- (" + test2.x + ", " + test2.z + ")");
+        //Selected Hex Coordinates
+        Vector3 test = getWorldCoordsFromHex(getNearestHexCoord(getMouseHexWorldCoord().getPosition()));
+        Debug.Log("HexC: X-" +test.x + ", Z-" + test.z);
     }
 
-    private HexPosition getMouseHexWorldCoord()
+    public HexPosition getMouseHexWorldCoord()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit[] hits = Physics.RaycastAll(ray);
@@ -56,23 +57,29 @@ public class GridController : MonoBehaviour
     {
         float x = 0;
         float y = 0;
-
         x = (1.5f * SIZE) * coord.x;
-        y = ((SQRT32 * coord.y * SIZE) + ((coord.y % 2) * SQRT32 * SIZE));
+        if (coord.x % 2 == 0)
+        {
+            y = (SQRT32 * SIZE) * (coord.y * 2);
+        }
+        else
+        {
+            y = (SQRT32 * SIZE) * ((coord.y * 2) - 1);
+        }
 
         return new Vector3(x, 0, y);
     }
 
 
 
-    private Vector2Int getNearestHexCoord(Vector3 coord)
+    public Vector2Int getNearestHexCoord(Vector3 coord)
     {
         float yy = 1 / SQRT32 * coord.z / SIZE + 1;
         float xx = coord.x / SIZE + yy / 2 + 0.5f;
         int u = Mathf.FloorToInt((Mathf.Floor(xx) + Mathf.Floor(yy)) / 3);
         int v = Mathf.FloorToInt((xx - yy + u + 1) / 2);
 
-        print(v + " " + u);
+        Debug.Log("HexX:" + v + " HexY:" + u);
         return (new Vector2Int(v,u));
     }
 }
