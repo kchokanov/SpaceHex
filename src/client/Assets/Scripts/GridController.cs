@@ -7,6 +7,7 @@ public class GridController : MonoBehaviour
 
     public int gridWidth;
     public int gridHeight;
+    public static Vector3 highlightHex;
 
     private const float SQRT32 = 0.86602540378443864676372317075294f;
     private const int SIZE = 20;
@@ -24,8 +25,8 @@ public class GridController : MonoBehaviour
     void Update()
     {
         //Selected Hex Coordinates
-        Vector3 test = getWorldCoordsFromHex(getNearestHexCoord(getMouseHexWorldCoord().getPosition()));
-        Debug.Log("HexC: X-" +test.x + ", Z-" + test.z);
+        highlightHex = getWorldCoordsFromHex(getNearestHexCoord(getMouseHexWorldCoord().getPosition()));
+        Debug.Log("HexC: X = " + highlightHex.x + ", Z = " + highlightHex.z);
     }
 
     public HexPosition getMouseHexWorldCoord()
@@ -53,26 +54,19 @@ public class GridController : MonoBehaviour
         }
     }
 
-    public Vector3 getWorldCoordsFromHex( Vector2 coord )
+    private Vector3 getWorldCoordsFromHex( Vector2 coord )
     {
         float x = 0;
         float y = 0;
+        float actY = coord.y - coord.x / 2f; 
         x = (1.5f * SIZE) * coord.x;
-        if (coord.x % 2 == 0)
-        {
-            y = (SQRT32 * SIZE) * (coord.y * 2);
-        }
-        else
-        {
-            y = (SQRT32 * SIZE) * ((coord.y * 2) - 1);
-        }
-
+        y = (SQRT32 * SIZE) * (actY * 2);
         return new Vector3(x, 0, y);
     }
 
 
 
-    public Vector2Int getNearestHexCoord(Vector3 coord)
+    private Vector2Int getNearestHexCoord(Vector3 coord)
     {
         float yy = 1 / SQRT32 * coord.z / SIZE + 1;
         float xx = coord.x / SIZE + yy / 2 + 0.5f;

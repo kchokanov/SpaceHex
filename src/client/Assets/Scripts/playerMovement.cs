@@ -19,7 +19,7 @@ public class PlayerMovement : MonoBehaviour {
 
         if (Input.GetMouseButtonDown(0))
         {
-            target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            target = GridController.highlightHex;
             target.y = 0;
             if (!move)
             {
@@ -38,6 +38,6 @@ public class PlayerMovement : MonoBehaviour {
             transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
         }
         //Player Position
-        //Debug.Log("PX:" + transform.position.x + " PZ:" + transform.position.z);
+        Debug.Log("PX:" + transform.position.x + " PZ:" + transform.position.z);
     }
 }
